@@ -62,19 +62,24 @@ const CartPage = () => {
   const handlePayment = async () => {
     try {
       setLoading(true);
-      const { nonce } = await instance.requestPaymentMethod();
-      const { data } = await axios.post("http://localhost:4000/api/v1/product/braintree/payment", {
-        nonce,
+      // const { nonce } = await instance.requestPaymentMethod();
+      // const { data } = await axios.post("http://localhost:4000/api/v1/product/braintree/payment", {
+      //   nonce,
+      //   cart,
+      // });
+      const res = await axios.post("http://localhost:4000/api/v1/product/braintree/payment", {
         cart,
       });
+      console.log(res);
       setLoading(false);
       localStorage.removeItem("cart");
       setCart([]);
       navigate("/dashboard/user/orders");
       toast.success("Payment Completed Successfully ");
     } catch (error) {
-      console.log(error);
       setLoading(false);
+      console.log(error);
+      // setLoading(false);
     }
   };
   return (
@@ -167,7 +172,45 @@ const CartPage = () => {
                   )}
                 </div>
               )}
+              {/* ------------------------------------------------------ */}
               <div className="mt-2">
+                {!auth?.user ? (
+                  ""
+                ) : (
+                  <>
+                    {/* <DropIn
+                      options={{
+                        authorization: clientToken,
+                        paypal: {
+                          flow: "vault",
+                        },
+                      }}
+                      onInstance={(instance) => setInstance(instance)}
+                    /> */}
+
+                    <button
+                      className="btn btn-primary"
+                      onClick={handlePayment}
+                      disabled={loading }
+                    >
+                      {loading ? "Processing ...." : "Make Payment"}
+                    </button>
+                  </>
+                )}
+              </div>
+              {/* ------------------------------------------------------ */}
+            </div>
+          </div>
+        </div>
+      </div>
+    </Layout>
+  );
+};
+
+export default CartPage;
+
+
+{/*    <div className="mt-2">
                 {!clientToken || !auth?.token || !cart?.length ? (
                   ""
                 ) : (
@@ -191,13 +234,4 @@ const CartPage = () => {
                     </button>
                   </>
                 )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </Layout>
-  );
-};
-
-export default CartPage;
+              </div> */}
