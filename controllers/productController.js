@@ -362,6 +362,12 @@ export const brainTreePaymentController = async (req, res) => {
     await order.save();
 
     console.log(order);
+
+    res.status(201).send({
+      success: true,
+      message: "Order Created Successfully",
+      order,
+    });
     // let newTransaction = gateway.transaction.sale(
     //   {
     //     amount: total,
