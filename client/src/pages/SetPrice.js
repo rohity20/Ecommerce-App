@@ -45,6 +45,7 @@ const SetPrice = () => {
     getSingleProduct();
     //eslint-disable-next-line
   }, []);
+
   //get all category
   const getAllCategory = async () => {
     try {
@@ -60,6 +61,29 @@ const SetPrice = () => {
 
   useEffect(() => {
     getAllCategory();
+  }, []);
+
+  //get price by id
+  const getPrice = async () => {
+    try {
+      console.log(id);
+      console.log(auth.user.email);
+      const { data } = await axios.get("http://localhost:4000/api/v1/price/get-productpricebyid", {
+        "id": id, "userId": auth.user.email
+      }
+      );
+
+      if (data?.success) {
+        setPrice(data?.newprice);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong in getting price");
+    }
+  };
+
+  useEffect(() => {
+    getPrice();
   }, []);
 
   //create product function
@@ -118,13 +142,15 @@ const SetPrice = () => {
   // };
   return (
     <Layout title={"Dashboard - Create Product"}>
+      <br></br>
       <div className="container-fluid m-3 p-3">
         <div className="row">
           <div className="col-md-3">
             {/* <AdminMenu /> */}
           </div>
           <div className="col-md-9">
-            <h1>Update Product</h1>
+            <h1>Set Price of Product</h1>
+
             <div className="m-1 w-75">
               <Select
                 bordered={false}
@@ -145,7 +171,8 @@ const SetPrice = () => {
                   </Option>
                 ))}
               </Select>
-              <div className="mb-3">
+
+              {/* <div className="mb-3">
                 <label className="btn btn-outline-secondary col-md-12" >
                   {photo ? photo.name : "Upload Photo"}
                   <input
@@ -157,7 +184,8 @@ const SetPrice = () => {
                     disabled
                   />
                 </label>
-              </div>
+              </div> */}
+              
               <div className="mb-3">
                 {photo ? (
                   <div className="text-center">
@@ -210,7 +238,8 @@ const SetPrice = () => {
                   disabled
                 />
               </div>
-              <div className="mb-3">
+
+              {/* <div className="mb-3">
                 <input
                   type="number"
                   value={quantity}
@@ -219,8 +248,9 @@ const SetPrice = () => {
                   onChange={(e) => setQuantity(e.target.value)}
                   disabled
                 />
-              </div>
-              <div className="mb-3">
+              </div> */}
+
+              {/* <div className="mb-3">
                 <Select
                   bordered={false}
                   placeholder="Select Shipping "
@@ -236,7 +266,7 @@ const SetPrice = () => {
                   <Option value="0">No</Option>
                   <Option value="1">Yes</Option>
                 </Select>
-              </div>
+              </div> */}
               
               <div className="mb-3">
                 <input
