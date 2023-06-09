@@ -16,8 +16,10 @@ const priceSchema = new mongoose.Schema(
     // },
 
     productId: {
-        type: mongoose.ObjectId,
-        ref: "Products",
+        // type: mongoose.ObjectId,
+        // ref: "Products",
+        // required: true,
+        type: String,
         required: true,
       },
     newprice: {
@@ -29,8 +31,11 @@ const priceSchema = new mongoose.Schema(
         default: "process",
     },
     userId: {
-        type: mongoose.ObjectId,
-        ref: "users",
+        // type: mongoose.ObjectId,
+        // ref: "users",
+        // required: true
+        type: String,
+        required: true
       },
     
     // quantity: {

@@ -5,9 +5,11 @@ import { Select } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import Layout from "../components/Layout/Layout";
 import AdminMenu from "../components/Layout/AdminMenu";
+import { useAuth } from "../context/auth";
 const { Option } = Select;
 
 const SetPrice = () => {
+  const [auth, setAuth] = useAuth();
   const navigate = useNavigate();
   const params = useParams();
   const [categories, setCategories] = useState([]);
@@ -65,21 +67,33 @@ const SetPrice = () => {
     e.preventDefault();
     try {
       const productData = new FormData();
-      productData.append("name", name);
-      productData.append("description", description);
-      productData.append("price", price);
-      productData.append("quantity", quantity);
-      photo && productData.append("photo", photo);
-      productData.append("category", category);
-      const { data } = axios.put(
-        `http://localhost:4000/api/v1/product/update-product/${id}`,
-        productData
+      // productData.append("name", name);
+      // productData.append("description", description);
+      // productData.append("price", price);
+      // productData.append("quantity", quantity);
+      // photo && productData.append("photo", photo);
+      // productData.append("category", category);
+      productData.append("id", id);
+      productData.append("newprice", newPrice);
+      productData.append("userId", auth.user.email);
+      console.log(productData.id);
+      console.log(productData.newPrice);
+      console.log(auth.user.email);
+      console.log(id);
+      console.log(newPrice);
+  
+      const { data } = axios.post(
+        `http://localhost:4000/api/v1/price/create-price`, 
+        // productData
+        {
+          "id": id, newprice: newPrice, userId: auth.user.email
+        }
       );
       if (data?.success) {
         toast.error(data?.message);
       } else {
         toast.success("Product Updated Successfully");
-        navigate("/dashboard/admin/products");
+        // navigate("/dashboard/admin/products");
       }
     } catch (error) {
       console.log(error);
@@ -88,26 +102,26 @@ const SetPrice = () => {
   };
 
   //delete a product
-  const handleDelete = async () => {
-    try {
-      let answer = window.prompt("Are You Sure want to delete this product ? ");
-      if (!answer) return;
-      const { data } = await axios.delete(
-        `http://localhost:4000/api/v1/product/delete-product/${id}`
-      );
-      toast.success("Product DEleted Succfully");
-      navigate("/dashboard/admin/products");
-    } catch (error) {
-      console.log(error);
-      toast.error("Something went wrong");
-    }
-  };
+  // const handleDelete = async () => {
+  //   try {
+  //     let answer = window.prompt("Are You Sure want to delete this product ? ");
+  //     if (!answer) return;
+  //     const { data } = await axios.delete(
+  //       `http://localhost:4000/api/v1/product/delete-product/${id}`
+  //     );
+  //     toast.success("Product DEleted Succfully");
+  //     navigate("/dashboard/admin/products");
+  //   } catch (error) {
+  //     console.log(error);
+  //     toast.error("Something went wrong");
+  //   }
+  // };
   return (
     <Layout title={"Dashboard - Create Product"}>
       <div className="container-fluid m-3 p-3">
         <div className="row">
           <div className="col-md-3">
-            <AdminMenu />
+            {/* <AdminMenu /> */}
           </div>
           <div className="col-md-9">
             <h1>Update Product</h1>
@@ -230,21 +244,21 @@ const SetPrice = () => {
                   value={newPrice}
                   placeholder="write a new price"
                   className="form-control"
-                  onChange={(e) => setQuantity(e.target.value)}
+                  onChange={(e) => setnewPrice(e.target.value)}
                   autoFocus
                 />
               </div>
 
               <div className="mb-3">
                 <button className="btn btn-primary" onClick={handleUpdate}>
-                  UPDATE PRODUCT
+                  Set the Price
                 </button>
               </div>
-              <div className="mb-3">
+              {/* <div className="mb-3">
                 <button className="btn btn-danger" onClick={handleDelete}>
                   DELETE PRODUCT
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

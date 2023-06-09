@@ -1,7 +1,7 @@
 import productModel from "../models/productModel.js";
 import categoryModel from "../models/categoryModel.js";
 import orderModel from "../models/orderModel.js";
-import priceModel from "../models/priceMode.js";
+import priceModel from "../models/priceModel.js";
 
 import fs from "fs";
 import slugify from "slugify";
@@ -20,13 +20,14 @@ dotenv.config();
 
 export const createPriceController = async (req, res) => {
   try {
+    console.log("Inside controller");
     console.log(req.body);
-    const { productId, newprice, userId } =
+    const { id, newprice, userId } =
       req.body;
     // const { photo } = req.files;
     //alidation
     switch (true) {
-      case !productId:
+      case !id:
         return res.status(500).send({ error: "ProductId is Required" });
       case !newprice:
         return res.status(500).send({ error: "newprice is Required" });
@@ -36,7 +37,7 @@ export const createPriceController = async (req, res) => {
 
     // const prices = new priceModel({ ...req.fields });
     const prices = new priceModel({ 
-        productId: productId,
+        productId: id,
         newprice: newprice,
         userId: userId,
      });
@@ -164,9 +165,31 @@ export const deleteProductController = async (req, res) => {
   }
 };
 
+ const myfunc = (products)=>{
+  try {
+    console.log("Inside func");
+    const allprice = priceModel.find({"productId": products._id});
+    const oldprice = products.price;
+    const alluser = [];
+    for(var i=0; i<allprice.length; i++)
+    {
+      if(allprice[i].newprice >= oldprice)
+      {
+        alluser.push(allprice[i].userId);
+      }
+    }
+    console.log(alluser);
+    return true;
+  } catch (error) {
+    console.log(error); 
+    return false;
+  }
+ }
+
 //upate producta
 export const updateProductController = async (req, res) => {
   try {
+    console.log(req.fields);
     const { name, description, price, category, quantity, shipping } =
       req.fields;
     const { photo } = req.files;
@@ -198,6 +221,29 @@ export const updateProductController = async (req, res) => {
       products.photo.contentType = photo.type;
     }
     await products.save();
+    console.log("before calling func");
+    // if(myfunc(products)){
+    //   console.log("Price success");
+    // }
+    // else{
+    //   console.log("Price fail");
+    // }
+
+    console.log("Inside func");
+    const allprice = await priceModel.find({"productId": products._id});
+    const oldprice = products.price;
+    const alluser = [];
+    for(var i=0; i<allprice.length; i++)
+    {
+      if(allprice[i].newprice >= oldprice)
+      {
+        alluser.push(allprice[i].userId);
+      }
+    }
+    console.log(alluser);
+
+    console.log("after calling func");
+
     res.status(201).send({
       success: true,
       message: "Product Updated Successfully",
@@ -233,6 +279,7 @@ export const productFiltersController = async (req, res) => {
       error,
     });
   }
+  
 };
 
 // product count
