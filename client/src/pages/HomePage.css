@@ -1,0 +1,72 @@
+.banner {
+    background-image: url("https://s3.envato.com/files/649bbdaa-a9c3-4f4e-9edb-96805a74bb31/inline_image_preview.jpg");
+    background-position: center;
+    background-color: black;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vmin;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+  
+  .banner > h1 {
+    margin: 5vmax;
+  
+    font: 600 2.5vmax "Times New Roman";
+  }
+  
+  .banner > p {
+    font: 300 1.4vmax "Lucida Sans";
+  }
+  
+  .banner > a > button {
+    margin-bottom: 5vmax;
+    cursor: pointer;
+    background-color: transparent;
+    border: 1px solid rgb(63, 133, 202) ;
+    border-radius: 0;
+    padding: 1vmax;
+    transition: all 0.5s;
+    width: 9vmax;
+    font: 500 1vmax "Times New Roman";
+  }
+  .banner > a > button:hover {
+    background-color: rgba(255, 255, 255, 0);
+    color: red;
+  }
+  
+  .banner::after {
+    content: "";
+    width: 100vw;
+    height: 100vmin;
+    background-color: black;
+    position: absolute;
+    top: 0%;
+    left: 0;
+    clip-path: polygon(100% 100%, 0 100%, 100% 100%);
+    max-width: 100%;
+  }
+  
+  .homeHeading {
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.8vmax;
+    border-bottom: 1px solid rgba(21, 21, 21, 0.5);
+    width: 20vmax;
+    padding: 1vmax;
+    margin: 5vmax auto;
+    color: rgb(0, 0, 0, 0.7);
+  }
+  
+  .container {
+    display: flex;
+    margin: 2vmax auto;
+    width: 80vw;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 100%;
+  }

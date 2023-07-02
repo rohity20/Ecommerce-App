@@ -8,6 +8,8 @@ import toast from "react-hot-toast";
 import Layout from "./../components/Layout/Layout";
 import { AiOutlineReload } from "react-icons/ai";
 import "../styles/Homepage.css";
+import './HomePage.css'
+// import { CgMouse } from "react-icons/all";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -109,14 +111,30 @@ const HomePage = () => {
   return (
     <Layout title={"ALl Products - Best offers "}>
       {/* banner image */}
-      <img
-        src="/images/banner.png"
+      
+      {/* <img
+        // src="/images/banner.png"
+        // src="https://s3.envato.com/files/649bbdaa-a9c3-4f4e-9edb-96805a74bb31/inline_image_preview.jpg"
+        src = "/images/background.jpg"
         className="banner-img"
         alt="bannerimage"
         width={"100%"}
-      />
+      /> */}
+
+         <div className="banner">
+            <p>Welcome to Ecommerce</p>
+            <h1>FIND AMAZING PRODUCTS BELOW</h1>
+
+            <a href="#container">
+              <button>
+                Scroll 
+                {/* <CgMouse /> */}
+              </button>
+            </a>
+          </div>
+
       {/* banner image */}
-      <div className="container-fluid row mt-3 home-page">
+      <div className="container-fluid row mt-3 home-page" id="container">
         <div className="col-md-3 filters">
           <h4 className="text-center">Filter By Category</h4>
           <div className="d-flex flex-column">

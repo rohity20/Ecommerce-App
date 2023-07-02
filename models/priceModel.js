@@ -2,23 +2,8 @@ import mongoose from "mongoose";
 
 const priceSchema = new mongoose.Schema(
   {
-    // name: {
-    //   type: String,
-    //   required: true,
-    // },
-    // slug: {
-    //   type: String,
-    //   required: true,
-    // },
-    // description: {
-    //   type: String,
-    //   required: true,
-    // },
-
+   
     productId: {
-        // type: mongoose.ObjectId,
-        // ref: "Products",
-        // required: true,
         type: String,
         required: true,
       },
@@ -31,24 +16,10 @@ const priceSchema = new mongoose.Schema(
         default: "process",
     },
     userId: {
-        // type: mongoose.ObjectId,
-        // ref: "users",
-        // required: true
         type: String,
         required: true
       },
-    
-    // quantity: {
-    //   type: Number,
-    //   required: true,
-    // },
-    // photo: {
-    //   data: Buffer,
-    //   contentType: String,
-    // },
-    // shipping: {
-    //   type: Boolean,
-    // },
+  
   },
   { timestamps: true }
 );

@@ -7,6 +7,7 @@ import slugify from "slugify";
 import braintree from "braintree";
 import dotenv from "dotenv";
 import priceModel from "../models/priceModel.js";
+import sendEmail from "../middlewares/sendEmail.js";
 
 dotenv.config();
 
@@ -225,6 +226,30 @@ export const updateProductController = async (req, res) => {
     console.log(alluser);
 
     console.log("after calling func");
+
+    //-------------------------email send to user------------------------------------
+    for(var i=0; i<alluser.length; i++)
+    try {
+
+      await sendEmail({
+        email: alluser[i],
+        subject: `Ecommerce Price Dropper`,
+        message: `Product Price drop .......`,
+      })
+
+
+      res.status(200).json({
+        success: true,
+        alluser,
+        message: `Email sent to ${alluser[i]} succcessfully . Since your price drop to your require price`,
+      })
+
+    } catch (error) {
+
+      // return next(new ErrorHander(error.message, 500));
+      return console.log(error);
+    };
+    //-------------------------------------------------------------
 
     res.status(201).send({
       success: true,
