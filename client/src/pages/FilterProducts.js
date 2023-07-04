@@ -5,13 +5,13 @@ import { Prices } from "../components/Prices";
 import { useCart } from "../context/cart";
 import axios from "axios";
 import toast from "react-hot-toast";
-import Layout from "./../components/Layout/Layout";
+import Layout from "../components/Layout/Layout";
 import { AiOutlineReload } from "react-icons/ai";
-import "../styles/Homepage.css";
-import './HomePage.css'
+// import "../styles/FilterProducts.css";
+// import './FilterProducts.css'
 // import { CgMouse } from "react-icons/all";
 
-const HomePage = () => {
+const FilterProducts = () => {
   const navigate = useNavigate();
   const [cart, setCart] = useCart();
   const [products, setProducts] = useState([]);
@@ -110,28 +110,6 @@ const HomePage = () => {
   };
   return (
     <Layout title={"ALl Products - Best offers "}>
-      {/* banner image */}
-      
-      {/* <img
-        // src="/images/banner.png"
-        // src="https://s3.envato.com/files/649bbdaa-a9c3-4f4e-9edb-96805a74bb31/inline_image_preview.jpg"
-        src = "/images/background.jpg"
-        className="banner-img"
-        alt="bannerimage"
-        width={"100%"}
-      /> */}
-
-         <div className="banner">
-            <p>Welcome to Ecommerce</p>
-            <h1>FIND AMAZING PRODUCTS BELOW</h1>
-
-            <a href="#container">
-              <button>
-                Scroll 
-                {/* <CgMouse /> */}
-              </button>
-            </a>
-          </div>
 
       {/* banner image */}
       <div className="container-fluid row mt-3 home-page" id="container">
@@ -181,9 +159,9 @@ const HomePage = () => {
                   <div className="card-name-price">
                     <h5 className="card-title">{p.name}</h5>
                     <h5 className="card-title card-price">
-                      {p.price.toLocaleString("en-IN", {
+                      {p.price.toLocaleString("en-US", {
                         style: "currency",
-                        currency: "INR",
+                        currency: "USD",
                       })}
                     </h5>
                   </div>
@@ -241,4 +219,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default FilterProducts;

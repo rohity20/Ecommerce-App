@@ -7,9 +7,13 @@
   justify-content: center;
   min-height: 70vh;
   flex-direction: column;
-  background-color: #ffdee9;
-  background-image: linear-gradient(0deg, #ffdee9 0%, #b5fffc 100%);
+  /* background-color: #ffdee9; */
+  /* background-image: linear-gradient(0deg, #ffdee9 0%, #b5fffc 100%); */
+  background-image: url("https://s3.envato.com/files/649bbdaa-a9c3-4f4e-9edb-96805a74bb31/inline_image_preview.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
+
 
 .form-container form {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;

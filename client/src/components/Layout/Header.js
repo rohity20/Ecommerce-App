@@ -47,6 +47,13 @@ const Header = () => {
                   Home
                 </NavLink>
               </li>
+
+              <li className="nav-item">
+                <NavLink to="/allproducts" className="nav-link ">
+                  Products
+                </NavLink>
+              </li>
+
               <li className="nav-item dropdown">
                 <Link
                   className="nav-link dropdown-toggle"

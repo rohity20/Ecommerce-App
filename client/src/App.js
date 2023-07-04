@@ -25,12 +25,17 @@ import CategoryProduct from "./pages/CategoryProduct";
 import CartPage from "./pages/CartPage";
 import AdminOrders from "./pages/Admin/AdminOrders";
 import SetPrice from "./pages/SetPrice";
+import FilterProducts from "./pages/FilterProducts";
+
 function App() {
   return (
     <>
       <Routes>
 
         <Route path="/" element={<HomePage />} />
+
+        <Route path="/allproducts" element={<FilterProducts />} />
+
         <Route path="/product/:slug" element={<ProductDetails />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/cart" element={<CartPage />} />

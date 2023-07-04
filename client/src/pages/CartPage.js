@@ -24,9 +24,9 @@ const CartPage = () => {
       cart?.map((item) => {
         total = total + item.price;
       });
-      return total.toLocaleString("en-US", {
+      return total.toLocaleString("en-IN", {
         style: "currency",
-        currency: "USD",
+        currency: "INR",
       });
     } catch (error) {
       console.log(error);
@@ -101,7 +101,7 @@ const CartPage = () => {
             </h1>
           </div>
         </div>
-        <div className="container ">
+        <div className="contatotaliner ">
           <div className="row ">
             <div className="col-md-7  p-0 m-0">
               {cart?.map((p) => (
