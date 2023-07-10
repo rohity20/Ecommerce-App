@@ -21,6 +21,7 @@ const HomePage = () => {
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [nos, setNos] =useState(6);
 
   //get all cat
   const getAllCategory = async () => {
@@ -132,10 +133,13 @@ const HomePage = () => {
               </button>
             </a>
           </div>
-
+      <div>
+        
+      </div>
       {/* banner image */}
-      <div className="container-fluid row mt-3 home-page" id="container">
-        <div className="col-md-3 filters">
+      <div className="container-fluid mt-3 home-page"  id="container">
+      <div className="col-md-1"></div>
+        {/* <div className="col-md-3 filters">
           <h4 className="text-center">Filter By Category</h4>
           <div className="d-flex flex-column">
             {categories?.map((c) => (
@@ -147,7 +151,7 @@ const HomePage = () => {
               </Checkbox>
             ))}
           </div>
-          {/* price filter */}
+          // price filter 
           <h4 className="text-center mt-4">Filter By Price</h4>
           <div className="d-flex flex-column">
             <Radio.Group onChange={(e) => setRadio(e.target.value)}>
@@ -166,8 +170,8 @@ const HomePage = () => {
               RESET FILTERS
             </button>
           </div>
-        </div>
-        <div className="col-md-9 ">
+        </div> */}
+        <div className="col-md-11">
           <h1 className="text-center">All Products</h1>
           <div className="d-flex flex-wrap">
             {products?.map((p) => (
@@ -216,7 +220,7 @@ const HomePage = () => {
             ))}
           </div>
           <div className="m-2 p-3">
-            {products && products.length < total && (
+            {products && products.length < total  && (
               <button
                 className="btn loadmore"
                 onClick={(e) => {
